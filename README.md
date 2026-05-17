@@ -18,10 +18,8 @@ Track your Nigerian prepaid electricity meter units remotely and get alerts befo
 
 ## Local Setup
 
-### Install dependencies
+### Install dependencies and Run Development Server
 ```bash
 npm install
 
-## Run Development Server
-```bash 
 npm run dev
