@@ -6,7 +6,6 @@ Track your Nigerian prepaid electricity meter units remotely and get alerts befo
 - Meter tracking
 - Recharge history logging
 - Low unit alerts
-- Google & email authentication
 - Usage estimation dashboard
 
 ## Tech Stack
