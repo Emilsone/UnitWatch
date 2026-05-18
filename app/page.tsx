@@ -1,6 +1,7 @@
 "use client";
 export const dynamic = "force-dynamic";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next"
 import { useEffect, useState } from "react";
 import { Zap, Bell, BarChart3, Users, ArrowRight, ChevronDown, Check, Star, Shield, Smartphone } from "lucide-react";
 
@@ -372,6 +373,7 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+      <Analytics />
     </main>
   );
 }
