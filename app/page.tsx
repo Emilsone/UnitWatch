@@ -232,7 +232,7 @@ export default function LandingPage() {
       {/* STATS BAND */}
       <div className="bg-gold/[0.05] border-y border-gold/10 py-10 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center">
-          {[["12,400+","Meters tracked"],["₦2.1B+","Units recharged via alerts"],["6","DisCos supported"],["4.8★","Average rating"]].map(([n,l])=>(
+          {[["2,400+","Meters tracked"],["₦500k+","Units recharged via alerts"],["6","DisCos supported"],["4.2★","Average rating"]].map(([n,l])=>(
             <div key={l} className="reveal">
               <div className="font-display text-[36px] sm:text-[48px] font-bold text-gold leading-none mb-2">{n}</div>
               <div className="text-[12px] sm:text-[13px] text-cream/35">{l}</div>
@@ -250,9 +250,9 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { name:"Adaeze Okonkwo", loc:"Lagos Island", role:"Landlord, 6 units", q:"I manage 6 tenants. Before UnitWatch I was driving home every weekend just to check meters. Now I do it from my phone at work.", d:"d1" },
-              { name:"Emeka Nwosu", loc:"Port Harcourt", role:"Homeowner", q:"The alert saved me twice. I was in Abuja for a meeting when my wife's meter hit 5 units. Bought units immediately, the family didn't even notice.", d:"d2" },
-              { name:"Funke Balogun", loc:"Abuja", role:"Business owner", q:"My shop and my house on one dashboard. The daily estimate is scary accurate. I have completely stopped running out. Not once since I joined.", d:"d3" },
+              { name:"Adaeze Okonkwo", loc:"Lagos Island", role:"Landlord, 6 units", q:"I manage 6 tenants, and before UnitWatch it was hard to really keep track of usage, and same thing for the tenants. After I started using it, I introduced it to them too so everyone is on the same page and nobody runs out of units unexpectedly.", d:"d1" },
+              { name:"Emeka Nwosu", loc:"Port Harcourt", role:"Homeowner", q:"The alert saved me twice. I was in Abuja for a meeting when my wife's meter hit 5 units. I bought the units immediately, and sent the token to them ", d:"d2" },
+              { name:"Funke Balogun", loc:"Abuja", role:"Business owner", q:" Having my shop and house on one dashboard has made things much easier for me. What surprised me the most is how accurate the daily estimate is. Since I started using it, I haven’t run out of units once.", d:"d3" },
             ].map((t)=>(
               <div key={t.name} className={`reveal ${t.d} bg-cream/[0.03] border border-cream/[0.07] rounded-2xl p-6 sm:p-8 hover:border-gold/18 hover:-translate-y-1 transition-all duration-300`}>
                 <span className="font-display text-[56px] text-gold/20 leading-none block -mb-1">"</span>
