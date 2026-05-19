@@ -1,6 +1,6 @@
 # UnitWatch 🔌
 
-Track your Nigerian prepaid electricity meter units remotely and get alerts before your electricity runs out.
+Track your Nigerian prepaid electricity meter units remotely and get alerts before your electricity runs out and leaves you in dark.
 
 ## Features
 - Meter tracking
