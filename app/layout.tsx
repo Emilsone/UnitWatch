@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   title: "UnitWatch — Never Run Out of Light",
   description:
     "Track your Nigerian prepaid electricity meter units remotely. Get alerts before your light goes out.",
-  keywords: "prepaid meter, Nigeria, electricity units, NEPA, DisCo, kWh tracker",
+    keywords:
+    "Nigerian prepaid meter tracker, electricity unit monitor, NEPA meter app, DisCo electricity tracker, kWh monitoring Nigeria, prepaid electricity alerts, smart meter tracking, electricity usage app Nigeria, meter balance checker, power outage prevention, electricity consumption tracker, UnitWatch",
 };
 
 export default function RootLayout({
