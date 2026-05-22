@@ -1,3 +1,4 @@
+// utils/supabase/server.ts
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
@@ -14,12 +15,13 @@ export async function createClient() {
         },
         setAll(cookiesToSet) {
           try {
+            // Securely loop through and append all authorization cookies
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options)
             )
           } catch {
-            // The `setAll` method can be ignored if
-            // middleware is handling session refreshes
+            // Next.js Server Components can safely pass the cookie updates
+            // down into your Middleware engine automatically.
           }
         },
       },

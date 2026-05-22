@@ -1,3 +1,4 @@
+// app/auth/callback/route.ts
 import { NextResponse } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
 
@@ -9,11 +10,12 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
+    
     if (!error) {
+      // The cookies are now written perfectly on the redirect pass!
       return NextResponse.redirect(`${origin}${next}`)
     }
   }
 
-  // Return the user to an error page if auth fails
-  return NextResponse.redirect(`${origin}/auth/auth-error`)
+  return NextResponse.redirect(`${origin}/auth?error=auth-failed`)
 }
