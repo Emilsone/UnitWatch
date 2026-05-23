@@ -1,5 +1,9 @@
 import { RechargeLog, MeterWithStats, Meter } from "@/types";
 
+const DEFAULT_DAILY_KWH = 10;
+
+const MIN_DAYS_FOR_ESTIMATE = 3;
+
 export function computeMeterStats(meter: Meter, logs: RechargeLog[]): MeterWithStats {
   if (!logs || logs.length === 0) {
     return {
@@ -19,39 +23,53 @@ export function computeMeterStats(meter: Meter, logs: RechargeLog[]): MeterWithS
   );
 
   const totalUnits = logs.reduce((sum, l) => sum + l.units_kwh, 0);
-  const firstDate = new Date(sorted[0].date);
+
+  const lastLog = sorted[sorted.length - 1];
+  const lastRechargeDate = new Date(lastLog.date);
   const today = new Date();
-  const daysSinceFirst = Math.max(
-    1,
-    Math.ceil((today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24))
+  today.setHours(0, 0, 0, 0);
+  lastRechargeDate.setHours(0, 0, 0, 0);
+
+  const daysSinceLastRecharge = Math.max(
+    0,
+    Math.floor((today.getTime() - lastRechargeDate.getTime()) / (1000 * 60 * 60 * 24))
   );
 
-  const dailyConsumption = totalUnits / daysSinceFirst;
 
-  // Remaining = total loaded minus consumed since first recharge
-  const unitsConsumed = dailyConsumption * daysSinceFirst;
-  const estimatedRemaining = Math.max(0, totalUnits - unitsConsumed);
+  const firstDate = new Date(sorted[0].date);
+  firstDate.setHours(0, 0, 0, 0);
+  const totalDaysOfHistory = Math.max(
+    1,
+    Math.floor((today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24))
+  );
 
-  // Days left based on remaining
-  const daysRemaining =
-    dailyConsumption > 0 ? estimatedRemaining / dailyConsumption : 0;
 
-  // Percent: remaining vs last recharge batch size as reference
-  const lastLog = sorted[sorted.length - 1];
-  const referenceUnits = lastLog.units_kwh;
+  const calculatedDaily = totalUnits / totalDaysOfHistory;
+  const dailyConsumption = totalDaysOfHistory >= MIN_DAYS_FOR_ESTIMATE
+    ? calculatedDaily
+    : DEFAULT_DAILY_KWH;
+
+
+  const unitsConsumedSinceLastRecharge = dailyConsumption * daysSinceLastRecharge;
+  const estimatedRemaining = Math.max(0, lastLog.units_kwh - unitsConsumedSinceLastRecharge);
+
+
+  const daysRemaining = dailyConsumption > 0 ? estimatedRemaining / dailyConsumption : 0;
+
+
   const percentRemaining = Math.min(
     100,
-    Math.max(0, (estimatedRemaining / referenceUnits) * 100)
+    Math.max(0, (estimatedRemaining / lastLog.units_kwh) * 100)
   );
 
   return {
     ...meter,
-    total_units_loaded: totalUnits,
+    total_units_loaded: Math.round(totalUnits * 10) / 10,
     estimated_units_remaining: Math.round(estimatedRemaining * 10) / 10,
     daily_consumption: Math.round(dailyConsumption * 10) / 10,
     days_remaining: Math.round(daysRemaining),
     percent_remaining: Math.round(percentRemaining),
-    last_recharge_date: sorted[sorted.length - 1].date,
+    last_recharge_date: lastLog.date,
     recharge_logs: sorted.reverse(),
   };
 }
