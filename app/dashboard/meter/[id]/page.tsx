@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/utils/supabase/client";
 import { computeMeterStats, getUnitColor, getUnitStatus, formatNaira } from "@/lib/calculations";
 import { MeterWithStats, RechargeLog, DISCOS, RECHARGE_LINKS } from "@/types";
 import {
@@ -14,6 +14,7 @@ export default function MeterDetailPage() {
   const router = useRouter();
   const params = useParams();
   const meterId = params.id as string;
+  const supabase = createClient();
 
   const [meter, setMeter] = useState<MeterWithStats | null>(null);
   const [loading, setLoading] = useState(true);

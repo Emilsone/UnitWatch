@@ -3,11 +3,12 @@ export const dynamic = "force-dynamic";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/utils/supabase/client";
 import { Zap, ArrowLeft, User, Bell, Shield, LogOut, Save } from "lucide-react";
 
 export default function SettingsPage() {
   const router = useRouter();
+  const supabase = createClient();
   const [user, setUser] = useState<any>(null);
   const [meterCount, setMeterCount] = useState(0);
   const [loading, setLoading] = useState(true);
