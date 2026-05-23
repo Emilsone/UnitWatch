@@ -1,13 +1,5 @@
 # UnitWatch 🔌
 
-Track your Nigerian prepaid electricity meter units remotely and get alerts before your electricity runs out and leaves you in dark.
-
-## Features
-- Meter tracking
-- Recharge history logging
-- Low unit alerts
-- Usage estimation dashboard
-
 ## Tech Stack
 - Next.js 14
 - TypeScript
