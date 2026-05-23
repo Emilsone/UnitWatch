@@ -1,6 +1,6 @@
 "use client";
 export const dynamic = "force-dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
@@ -12,7 +12,7 @@ import {
   TrendingDown, X,
 } from "lucide-react";
 
-export default function DashboardPage() {
+function DashboardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = createClient();
@@ -448,5 +448,19 @@ export default function DashboardPage() {
         </div>
       )}
     </div>
+  );
+}
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-soil flex items-center justify-center">
+        <div className="flex items-center gap-3 text-cream/40">
+          <div className="w-5 h-5 border-2 border-gold/30 border-t-gold rounded-full animate-spin" />
+          <span className="text-[14px]">Loading...</span>
+        </div>
+      </div>
+    }>
+      <DashboardContent />
+    </Suspense>
   );
 }
