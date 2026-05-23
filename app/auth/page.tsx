@@ -2,13 +2,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/utils/supabase/client"; // Updated import
+import { createClient } from "@/utils/supabase/client"; 
 import { Zap, Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 
 export default function AuthPage() {
   const router = useRouter();
-  const supabase = createClient(); // Initialized client here
-
+  const supabase = createClient(); 
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
